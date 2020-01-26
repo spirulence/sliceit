@@ -34,6 +34,8 @@ def put_transients_into_zip(data, samplerate, transients):
                 soundfile.write(slice_file.name, data[start:end], samplerate=samplerate)
                 zip.write(slice_file.name, arcname="slice_{}.wav".format(str(i).zfill(5)))
 
+        zip.close()
+
         temp_file.seek(0)
 
         return temp_file.read()
