@@ -1,10 +1,12 @@
 import tempfile
 import zipfile
+import os
 
 import librosa
 import requests
 import soundfile
-from flask import Flask, make_response
+import youtube_dl
+from flask import Flask, make_response, request
 
 app = Flask(__name__)
 
@@ -34,20 +36,46 @@ def put_transients_into_zip(data, samplerate, transients):
                 soundfile.write(slice_file.name, data[start:end], samplerate=samplerate)
                 zip.write(slice_file.name, arcname="slice_{}.wav".format(str(i).zfill(5)))
 
+        zip.close()
+
         temp_file.seek(0)
 
         return temp_file.read()
 
 
+def youtube_dl_transients(url):
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '256',
+        }],
+        'outtmpl': 'ytdl.mp3'
+    }
+
+    current_directory = os.getcwd()
+
+    with tempfile.TemporaryDirectory() as tempdir:
+
+        os.chdir(tempdir)
+
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
+
+        data, samplerate, transients = get_transients("./ytdl.mp3")
+
+    os.chdir(current_directory)
+
+    return data, samplerate, transients
+
+
 @app.route("/slice/<path:url>")
 def slice(url):
-    filetype = "." + url.rpartition('.')[2]
-
-    with tempfile.NamedTemporaryFile(suffix=filetype) as f:
-        r = requests.get(url)
-        f.write(r.content)
-
-        data, samplerate, transients = get_transients(f.name)
+    if "youtube" in url:
+        data, samplerate, transients = youtube_dl_transients(url+"?v="+request.args.get("v"))
+    else:
+        data, samplerate, transients = plain_request_transients(url)
 
     bytes = put_transients_into_zip(data, samplerate, transients)
 
@@ -57,3 +85,13 @@ def slice(url):
     response.headers['Content-Disposition'] = 'attachment; filename=sliced.zip'
 
     return response
+
+
+def plain_request_transients(url):
+    filetype = "." + url.rpartition('.')[2]
+    with tempfile.NamedTemporaryFile(suffix=filetype) as f:
+        r = requests.get(url)
+        f.write(r.content)
+
+        data, samplerate, transients = get_transients(f.name)
+    return data, samplerate, transients
