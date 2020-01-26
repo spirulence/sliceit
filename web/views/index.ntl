@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">About</h4>
+                <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Contact</h4>
+                <ul class="list-unstyled">
+                  <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                  <li><a href="#" class="text-white">Like on Facebook</a></li>
+                  <li><a href="#" class="text-white">Email me</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <svg width="50px" height="50px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+                <g>
+                    <path style="fill:#A7A7A7;" d="M232,138.625h-32.25h-34.5H94.877h-34H20c-5.5,0-10,4.5-10,10v271.001c0,5.5,4.5,10,10,10h27.5
+                        h47.25h322.5h47.25h27.501c5.5,0,10-4.5,10-10V148.625c0-5.5-4.5-10-10-10h-35.124h-34H346.75H232L232,138.625z M217.302,269.501
+                        h78.646v20.954c-1.816,7.596-2.784,15.52-2.784,23.671s0.968,16.075,2.784,23.671v20.954h-78.646v-20.953
+                        c1.816-7.596,2.784-15.521,2.784-23.672s-0.968-16.076-2.784-23.672V269.501L217.302,269.501z M118.586,246.592
+                        c37.298,0,67.534,30.236,67.534,67.534s-30.236,67.534-67.534,67.534s-67.534-30.236-67.534-67.534
+                        C51.052,276.828,81.288,246.592,118.586,246.592L118.586,246.592z M327.13,314.126c0-37.298,30.236-67.534,67.534-67.534
+                        s67.534,30.236,67.534,67.534c0,37.298-30.236,67.534-67.534,67.534S327.13,351.424,327.13,314.126z"/>
+                    <rect x="58.62" y="179.87" style="fill:#FF8346;" width="396" height="33.75"/>
+                    <path style="fill:#A7A7A7;" d="M60.877,138.625h34v-52.25h19.936v-34H70.877c-5.5,0-10,4.5-10,10V138.625z"/>
+                    <rect x="114.81" y="52.37" style="fill:#5381D3;" width="288.13" height="34"/>
+                    <path style="fill:#A7A7A7;" d="M402.942,52.375v34h19.936v52.25h34v-76.25c0-5.5-4.5-10-10-10H402.942z"/>
+                    <circle style="fill:#5381D3;" cx="118.59" cy="314.13" r="67.53"/>
+                    <path style="fill:#FF8346;" d="M217.302,290.454c1.816,7.596,2.784,15.521,2.784,23.672s-0.968,16.076-2.784,23.672v20.953h78.646
+                        v-20.954c-1.816-7.596-2.784-15.52-2.784-23.671s0.968-16.075,2.784-23.671v-20.954h-78.646V290.454z"/>
+                    <g>
+                        <circle style="fill:#5381D3;" cx="394.66" cy="314.13" r="67.53"/>
+                        <rect x="47.5" y="429.62" style="fill:#5381D3;" width="47.25" height="30"/>
+                        <rect x="417.25" y="429.62" style="fill:#5381D3;" width="47.25" height="30"/>
+                    </g>
+                </g>
+                <path d="M118.586,294.126c-11.016,0-20,8.984-20,20c0,11.015,8.984,20,20,20c11.015,0,20-8.984,20-20
+                    S129.602,294.126,118.586,294.126z"/>
+                <path d="M394.664,334.126c11.015,0,20-8.984,20-20s-8.985-20-20-20s-20,8.984-20,20
+                    C374.664,325.141,383.648,334.126,394.664,334.126z"/>
+                <path d="M492.001,128.625h-25.123v-66.25c0-11.028-8.972-20-20-20l0,0H70.877l0,0c-11.028,0-20,8.972-20,20v66.25H19.999
+                    c-11.027,0-19.999,8.972-19.999,20v271c0,11.028,8.972,20,19.999,20H37.5v20.001c0,5.523,4.478,10,10,10h47.25
+                    c5.522,0,10-4.477,10-10v-20.001h31.439c5.522,0,10-4.477,10-10s-4.478-10-10-10l0,0H20l-0.001-271h472.002v271l0,0H215.155
+                    c-5.523,0-10,4.477-10,10s4.477,10,10,10H407.25v20.001c0,5.523,4.478,10,10,10h47.25c5.522,0,10-4.477,10-10v-20.001h17.501
+                    c11.028,0,20-8.972,20-20v-271C512.001,137.597,503.029,128.625,492.001,128.625z M57.5,449.626v-10.001h27.25v10.001H57.5z
+                        M446.878,128.625h-14v-42.25c0-5.523-4.478-10-10-10h-9.936v-14h33.936V128.625z M346.75,103.126c-5.522,0-10,4.477-10,10v15.499
+                    H242v-15.499c0-5.523-4.477-10-10-10c-5.522,0-10,4.477-10,10v15.499h-12.25v-15.499c0-5.523-4.477-10-10-10
+                    c-5.522,0-10,4.477-10,10v15.499h-14.5v-15.499c0-5.523-4.477-10-10-10c-5.522,0-10,4.477-10,10v15.499h-50.373v-32.25l0,0h308.001
+                    l0,0v32.25H356.75v-15.499C356.75,107.603,352.272,103.126,346.75,103.126z M392.942,62.375v13.999h-268.13V62.375H392.942z
+                        M70.877,62.375h33.936v13.999h-9.936c-5.522,0-10,4.477-10,10v42.25h-14C70.877,128.624,70.877,62.375,70.877,62.375z
+                        M454.5,449.626h-27.25v-10.001h27.25V449.626z"/>
+                <path d="M454.625,169.875h-396c-5.522,0-10,4.477-10,10v33.75c0,5.523,4.478,10,10,10H334.22c5.522,0,10-4.477,10-10
+                    s-4.478-10-10-10H142.125v-13.75h302.5v13.75h-31.439c-5.522,0-10,4.477-10,10s4.478,10,10,10h41.439c5.522,0,10-4.477,10-10v-33.75
+                    C464.625,174.352,460.147,169.875,454.625,169.875z M122.125,203.625h-53.5v-13.75h53.5V203.625z"/>
+                <path d="M118.586,236.592c-42.753,0-77.534,34.781-77.534,77.534c0,42.752,34.781,77.534,77.534,77.534s77.534-34.781,77.534-77.534
+                    S161.339,236.592,118.586,236.592z M118.586,371.659c-31.725,0-57.534-25.81-57.534-57.534s25.81-57.534,57.534-57.534
+                    s57.534,25.81,57.534,57.534S150.311,371.659,118.586,371.659z"/>
+                <path d="M317.13,314.126c0,42.752,34.781,77.534,77.533,77.534c42.753,0,77.534-34.781,77.534-77.534s-34.781-77.534-77.534-77.534
+                    C351.911,236.592,317.13,271.373,317.13,314.126z M394.663,256.592c31.725,0,57.534,25.81,57.534,57.534
+                    s-25.81,57.534-57.534,57.534s-57.533-25.81-57.533-57.534S362.94,256.592,394.663,256.592z"/>
+                <path d="M363.779,223.625c5.522,0,10-4.477,10-10s-4.478-10-10-10h-0.476c-5.522,0-10,4.477-10,10s4.478,10,10,10H363.779z"/>
+                <path d="M305.947,290.455v-20.954c0-5.523-4.478-10-10-10h-78.645c-5.523,0-10,4.477-10,10v20.953c0,0.783,0.092,1.564,0.274,2.326
+                    c1.665,6.965,2.51,14.147,2.51,21.347c0,7.199-0.845,14.382-2.51,21.347c-0.183,0.762-0.274,1.542-0.274,2.326v20.952
+                    c0,5.523,4.477,10,10,10h78.645c5.522,0,10-4.477,10-10v-20.954c0-0.783-0.092-1.563-0.273-2.325
+                    c-1.665-6.966-2.51-14.148-2.51-21.347c0-7.198,0.845-14.38,2.51-21.346C305.855,292.018,305.947,291.238,305.947,290.455z
+                        M285.947,289.304c-1.847,8.119-2.783,16.463-2.783,24.821c0,8.358,0.936,16.703,2.783,24.822v9.803h-58.645v-9.802
+                    c1.848-8.118,2.784-16.463,2.784-24.823s-0.937-16.705-2.784-24.823V279.5h58.645V289.304z"/>
+                <path d="M186.071,419.625h-0.475c-5.522,0-10,4.477-10,10s4.478,10,10,10h0.475c5.522,0,10-4.477,10-10
+                    S191.594,419.625,186.071,419.625z"/>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                </svg>&nbsp;
+              <strong>BeatSlice.it</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+      
+      <main role="main">
+      
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1>Try it free!</h1>
+            <p class="lead text-muted">Paste a url to your video, mp3, wav, or other audio file.</p>
+            <form onsubmit="handleForm()" id="audio-form">
+                <div class="form-group">
+                  <label for="form-url">Url</label>
+                  <input type="url" class="form-control" id="form-url">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+          </div>
+        </section>
+      
+        <div class="album py-5 bg-light">
+          <div class="container">
+      
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </main>
+      
+      <footer class="text-muted">
+        <div class="container">
+          <p class="float-right">
+            <a href="#">Back to top</a>
+          </p>
+          <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+          <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.4/getting-started/introduction/">getting started guide</a>.</p>
+        </div>
+      </footer>
+      <script src="node_modules/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
+      <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+      
+      <script>
+          function handleForm(){
+            var action_src = "#SLICE_API_URL#" + document.getElementById("form-url").value
+            var your_form = document.getElementById('audio-form')
+            your_form.action = action_src
+          }
+
+      </script>
+</body>
