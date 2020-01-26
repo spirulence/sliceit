@@ -1,11 +1,12 @@
-FROM python:3.7-alpine
+FROM python:3.7-slim
 
 WORKDIR /app
 
 COPY Pipfile ./
 COPY Pipfile.lock ./
 
-RUN pip install pipenv==2018.11.26 && \
+RUN apt-get update && apt-get install libsndfile1 ffmpeg -y && \
+    pip install pipenv==2018.11.26 && \
     pipenv install --deploy --system && \
     pip uninstall pipenv -y
 
