@@ -70,7 +70,7 @@ def youtube_dl_transients(url):
     return data, samplerate, transients
 
 
-@app.route("/slice/<path:url>")
+@app.route("/slice/<path:url>", methods=["GET", "POST"])
 def slice(url):
     if "youtube" in url:
         data, samplerate, transients = youtube_dl_transients(url+"?v="+request.args.get("v"))
