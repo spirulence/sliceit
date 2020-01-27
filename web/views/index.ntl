@@ -127,7 +127,7 @@
           <div class="container">
             <h1>Try it free!</h1>
             <p class="lead text-muted">Paste a url to your video, mp3, wav, or other audio file.</p>
-            <form onsubmit="handleForm()" id="audio-form">
+            <form onsubmit="handleForm()" id="audio-form" method="post">
                 <div class="form-group">
                   <label for="form-url">Url</label>
                   <input type="url" class="form-control" id="form-url">
