@@ -6,6 +6,7 @@ import librosa
 import requests
 import soundfile
 import youtube_dl
+import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from flask import Flask, make_response, request

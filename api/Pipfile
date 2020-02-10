@@ -11,6 +11,7 @@ gunicorn = "*"
 librosa = "*"
 requests = "*"
 youtube-dl = "*"
+firebase-admin = "*"
 
 [requires]
 python_version = "3.7"
