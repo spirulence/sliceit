@@ -1,15 +1,23 @@
 import tempfile
 import zipfile
 import os
-
+import hashlib
 import librosa
 import requests
 import soundfile
 import youtube_dl
+from firebase_admin import credentials
+from firebase_admin import firestore
 from flask import Flask, make_response, request
 
 app = Flask(__name__)
 
+
+projectId = 'beatsliceit'
+cred = credentials.ApplicationDefault()
+firebase_admin.initialize_app(cred, {
+    'projectId': projectId,
+})
 
 @app.route("/ping")
 def ping():
@@ -85,6 +93,20 @@ def slice(url):
     response.headers['Content-Disposition'] = 'attachment; filename=sliced.zip'
 
     return response
+
+@app.route("/slice/prep", methods=["POST"])
+def slice_prep():
+    db = firestore.client()
+    url = request.json()['url']
+    urlHash = hashlib.sha256(bytes(url, 'utf-8')).hexdigest()
+    documentDict = {
+        'url': url,
+        'url_hash': urlHash,
+        'status': 'INITIALIZE'
+    }
+
+    slicing_status = db.collection(u'slicing-status')
+    slicing_status.document(urlHash).set(documentDict)
 
 
 def plain_request_transients(url):
