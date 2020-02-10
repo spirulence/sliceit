@@ -98,7 +98,7 @@ def slice(url):
 @app.route("/slice/prep", methods=["POST"])
 def slice_prep():
     db = firestore.client()
-    url = request.json()['url']
+    url = request.json['url']
     urlHash = hashlib.sha256(bytes(url, 'utf-8')).hexdigest()
     documentDict = {
         'url': url,
