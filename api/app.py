@@ -109,6 +109,10 @@ def slice_prep():
     slicing_status = db.collection(u'slicing-status')
     slicing_status.document(urlHash).set(documentDict)
 
+    return {
+        "pointer": urlHash
+    }
+
 
 def plain_request_transients(url):
     filetype = "." + url.rpartition('.')[2]
