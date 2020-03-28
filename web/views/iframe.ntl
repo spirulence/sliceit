@@ -127,7 +127,8 @@
 
         const status = <div>
             <p className="slicing-status text-center">{slicingStatus}</p>
-            <p className="text-center"><div className="lds-dual-ring"></div></p>
+            <p className="text-center">
+                <div className="lds-dual-ring"/></p>
         </div>;
 
         return (
