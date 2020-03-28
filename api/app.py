@@ -3,15 +3,16 @@ import zipfile
 import os
 import hashlib
 import librosa
-import requests
 import soundfile
 import youtube_dl
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from flask import Flask, make_response, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 projectId = 'beatsliceit'
@@ -20,19 +21,20 @@ firebase_admin.initialize_app(cred, {
     'projectId': projectId,
 })
 
+db = firestore.client()
+
+
 @app.route("/ping")
 def ping():
     return "pong"
 
 
-def get_transients(file_name):
-    x, sr = librosa.load(file_name)
-
-    transient_frames = librosa.onset.onset_detect(x, sr=sr, backtrack=True)
+def get_transients(data, samplerate):
+    transient_frames = librosa.onset.onset_detect(data, sr=samplerate, backtrack=True)
     # noinspection PyTypeChecker
     transient_samples = [0] + librosa.frames_to_samples(transient_frames).tolist()
 
-    return x, sr, transient_samples
+    return transient_samples
 
 
 def put_transients_into_zip(data, samplerate, transients):
@@ -52,7 +54,7 @@ def put_transients_into_zip(data, samplerate, transients):
         return temp_file.read()
 
 
-def youtube_dl_transients(url):
+def download_with_youtube_dl(url):
     ydl_opts = {
         'format': 'bestaudio/best',
         'postprocessors': [{
@@ -72,53 +74,57 @@ def youtube_dl_transients(url):
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
 
-        data, samplerate, transients = get_transients("./ytdl.mp3")
+        data, samplerate = librosa.load("./ytdl.mp3")
 
     os.chdir(current_directory)
 
-    return data, samplerate, transients
+    return data, samplerate
 
 
-@app.route("/slice/<path:url>", methods=["GET", "POST"])
-def slice(url):
-    if "youtube" in url:
-        data, samplerate, transients = youtube_dl_transients(url+"?v="+request.args.get("v"))
-    else:
-        data, samplerate, transients = plain_request_transients(url)
+@app.route("/slice/<pointer>", methods=["POST"])
+def slice_from_pointer(pointer):
+    slicing_status = db.collection(u'slicing-status')
+    document = slicing_status.document(pointer)
+    url = document.get().to_dict()["url"]
 
-    bytes = put_transients_into_zip(data, samplerate, transients)
+    document.update({"status": "DOWNLOADING"})
+    data, samplerate = download_with_youtube_dl(url)
 
-    response = make_response(bytes)
+    document.update({"status": "FINDING_BEATS"})
+    transients = get_transients(data, samplerate)
+
+    document.update({"status": "CREATING_ZIP_FILE"})
+    response = make_response(put_transients_into_zip(data, samplerate, transients))
 
     response.headers['Content-Type'] = 'application/zip'
     response.headers['Content-Disposition'] = 'attachment; filename=sliced.zip'
 
+    document.update({"status": "COMPLETE"})
     return response
+
 
 @app.route("/slice/prep", methods=["POST"])
 def slice_prep():
-    db = firestore.client()
     url = request.json['url']
-    urlHash = hashlib.sha256(bytes(url, 'utf-8')).hexdigest()
-    documentDict = {
+    url_hash = hashlib.sha256(bytes(url, 'utf-8')).hexdigest()
+    document_dict = {
         'url': url,
-        'url_hash': urlHash,
-        'status': 'INITIALIZE'
+        'url_hash': url_hash,
+        'status': 'INITIALIZED'
     }
 
     slicing_status = db.collection(u'slicing-status')
-    slicing_status.document(urlHash).set(documentDict)
+    slicing_status.document(url_hash).set(document_dict)
 
     return {
-        "pointer": urlHash
+        "reference": url_hash
     }
 
 
-def plain_request_transients(url):
-    filetype = "." + url.rpartition('.')[2]
-    with tempfile.NamedTemporaryFile(suffix=filetype) as f:
-        r = requests.get(url)
-        f.write(r.content)
-
-        data, samplerate, transients = get_transients(f.name)
-    return data, samplerate, transients
+@app.route("/slice/status/<pointer>")
+def slice_status(pointer):
+    slicing_status = db.collection(u'slicing-status')
+    status = slicing_status.document(pointer).get().to_dict()
+    return {
+        "status": status["status"]
+    }

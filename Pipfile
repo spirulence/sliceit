@@ -6,13 +6,11 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-flask = "*"
-gunicorn = "*"
-librosa = "*"
-requests = "*"
-youtube-dl = "*"
 firebase-admin = "*"
-flask-cors = "*"
+flask = "*"
+librosa = "*"
+soundfile = "*"
+youtube-dl = "*"
 
 [requires]
 python_version = "3.7"

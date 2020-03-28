@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  api:
+    ports:
+      - 8000:8000
+    build:
+      context: api
+    volumes:
+      - ./beatsliceit-local-dev-credentials.json:/root/local-development.json:ro
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: "/root/local-development.json"
+
+  web:
+    ports:
+      - 3000:3000
+    build:
+      context: web
+    volumes:
+    - ./web/views:/views

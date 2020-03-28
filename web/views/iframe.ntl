@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beat Slice IFrame</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div id="react_container"></div>
+</div>
+
+<script src="node_modules/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+<script src="https://unpkg.com/downloadjs@1.4.7/download.js" crossorigin></script>
+
+<script type="text/babel">
+    'use strict';
+
+    const SLICE_URL = '#SLICE_API_URL#';
+
+    const e = React.createElement;
+
+    function SliceForm() {
+
+        const [urlToSlice, setUrlToSlice] = React.useState("");
+        const [slicingPointer, setSlicingPointer] = React.useState("");
+        const [slicingStatus, setSlicingStatus] = React.useState("");
+
+        function handleUrlChange(event) {
+            setUrlToSlice(event.target.value)
+        }
+
+        async function handleUrlSubmit(event) {
+            event.preventDefault();
+            const response = await fetch(SLICE_URL + 'prep',
+                {
+                    method: "POST",
+                    body: JSON.stringify({url: urlToSlice}),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+            const data = await response.json();
+
+            setSlicingPointer(data.reference);
+
+            const sliceResponsePromise = fetch(SLICE_URL + data.reference, {method: "POST"});
+
+            const handler = function (){
+                fetch(SLICE_URL + 'status/' + data.reference)
+                    .then((response) => {return response.json()})
+                    .then((status) => {setSlicingStatus(status.status)});
+            };
+
+            const intervalId = setInterval(handler, 1000);
+
+            const sliceBlob = await (await sliceResponsePromise).blob();
+            download(sliceBlob, "sliced.zip");
+
+            clearInterval(intervalId);
+            handler();
+        }
+
+        return (
+            <div>
+                <h1>Try it free!</h1>
+                <p className="lead text-muted">Paste a url to your video, mp3, wav, or other audio file.</p>
+                <form id="audio-form">
+                    <div className="form-group">
+                        <input className="form-control" type="url" value={urlToSlice} onChange={handleUrlChange}/>
+                    </div>
+                    <button className="btn btn-primary" onClick={handleUrlSubmit}>Submit</button>
+                </form>
+                <p>{slicingPointer}</p>
+                <p>{slicingStatus}</p>
+            </div>
+        )
+    }
+
+    const domContainer = document.querySelector('#react_container');
+    ReactDOM.render(e(SliceForm), domContainer);
+</script>
+</body>
+</html>
