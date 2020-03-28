@@ -4,6 +4,46 @@
     <meta charset="UTF-8">
     <title>Beat Slice IFrame</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #000;
+        }
+
+        .iframe-content h1 {
+            color: #ccc;
+        }
+
+        .iframe-content .slicing-status {
+            color: #ccc;
+        }
+
+        .lds-dual-ring {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+
+        @keyframes lds-dual-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -29,6 +69,7 @@
         const [urlToSlice, setUrlToSlice] = React.useState("");
         const [slicingPointer, setSlicingPointer] = React.useState("");
         const [slicingStatus, setSlicingStatus] = React.useState("");
+        const [isSlicing, setIsSlicing] = React.useState(false);
 
         function handleUrlChange(event) {
             setUrlToSlice(event.target.value)
@@ -36,6 +77,10 @@
 
         async function handleUrlSubmit(event) {
             event.preventDefault();
+
+            setIsSlicing(true);
+            setSlicingStatus("SETTING UP");
+
             const response = await fetch(SLICE_URL + 'prep',
                 {
                     method: "POST",
@@ -50,33 +95,46 @@
 
             const sliceResponsePromise = fetch(SLICE_URL + data.reference, {method: "POST"});
 
-            const handler = function (){
+            const handler = function () {
                 fetch(SLICE_URL + 'status/' + data.reference)
-                    .then((response) => {return response.json()})
-                    .then((status) => {setSlicingStatus(status.status)});
+                    .then((response) => {
+                        return response.json()
+                    })
+                    .then((status) => {
+                        setSlicingStatus(status.status)
+                    });
             };
 
-            const intervalId = setInterval(handler, 1000);
+            const intervalId = setInterval(handler, 1500);
 
             const sliceBlob = await (await sliceResponsePromise).blob();
             download(sliceBlob, "sliced.zip");
 
             clearInterval(intervalId);
             handler();
+
+            setIsSlicing(false);
         }
 
+        const form = <div>
+            <form id="audio-form">
+                <div className="form-group">
+                    <input className="form-control" type="url" value={urlToSlice} onChange={handleUrlChange}/>
+                </div>
+                <button className="btn btn-light btn-block" onClick={handleUrlSubmit}>Submit</button>
+            </form>
+        </div>;
+
+        const status = <div>
+            <p className="slicing-status text-center">{slicingStatus}</p>
+            <p className="text-center"><div className="lds-dual-ring"></div></p>
+        </div>;
+
         return (
-            <div>
-                <h1>Try it free!</h1>
-                <p className="lead text-muted">Paste a url to your video, mp3, wav, or other audio file.</p>
-                <form id="audio-form">
-                    <div className="form-group">
-                        <input className="form-control" type="url" value={urlToSlice} onChange={handleUrlChange}/>
-                    </div>
-                    <button className="btn btn-primary" onClick={handleUrlSubmit}>Submit</button>
-                </form>
-                <p>{slicingPointer}</p>
-                <p>{slicingStatus}</p>
+            <div className="iframe-content">
+                <h1 className="text-center">Try it free!</h1>
+                <p className="lead text-muted text-center">Paste a url to your video, mp3, wav, or other audio file.</p>
+                {isSlicing ? status : form}
             </div>
         )
     }
