@@ -84,7 +84,7 @@
             const response = await fetch(SLICE_URL + 'prep',
                 {
                     method: "POST",
-                    body: JSON.stringify({url: urlToSlice}),
+                    body: JSON.stringify({url: urlToSlice, sensitivity: 'MEDIUM'}),
                     headers: {
                         "Content-Type": "application/json"
                     }

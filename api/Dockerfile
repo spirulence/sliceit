@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install libsndfile1 ffmpeg -y && \
     pip uninstall pipenv -y
 
 COPY entrypoint.sh ./
+COPY beatslice ./beatslice
 COPY app.py ./
 
 CMD ["./entrypoint.sh"]
