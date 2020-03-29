@@ -70,6 +70,7 @@
         const [slicingPointer, setSlicingPointer] = React.useState("");
         const [slicingStatus, setSlicingStatus] = React.useState("");
         const [isSlicing, setIsSlicing] = React.useState(false);
+        const [sensitivity, setSensitivity] = React.useState("MEDIUM");
 
         function handleUrlChange(event) {
             setUrlToSlice(event.target.value)
@@ -84,7 +85,7 @@
             const response = await fetch(SLICE_URL + 'prep',
                 {
                     method: "POST",
-                    body: JSON.stringify({url: urlToSlice, sensitivity: 'MEDIUM'}),
+                    body: JSON.stringify({url: urlToSlice, sensitivity: sensitivity}),
                     headers: {
                         "Content-Type": "application/json"
                     }
@@ -116,19 +117,35 @@
             setIsSlicing(false);
         }
 
+        function handleSensitivityChange(event) {
+            setSensitivity(event.target.value)
+        }
+
         const form = <div>
             <form id="audio-form">
-                <div className="form-group">
-                    <input className="form-control" type="url" value={urlToSlice} onChange={handleUrlChange}/>
+                <div className="form-row">
+                    <div className="col-8">
+                        <input className="form-control" type="url" value={urlToSlice} onChange={handleUrlChange}/>
+                    </div>
+                    <div className="col">
+                        <select className="form-control" value={sensitivity} onChange={handleSensitivityChange}>
+                            <option value="HIGH">High Sensitivity</option>
+                            <option value="MEDIUM" selected>Medium Sensitivity</option>
+                            <option value="LOW" >Low Sensitivity</option>
+                        </select>
+                    </div>
+                    <div className="col">
+                        <button className="btn btn-light btn-block" onClick={handleUrlSubmit}>Submit</button>
+                    </div>
                 </div>
-                <button className="btn btn-light btn-block" onClick={handleUrlSubmit}>Submit</button>
             </form>
         </div>;
 
         const status = <div>
             <p className="slicing-status text-center">{slicingStatus}</p>
             <p className="text-center">
-                <div className="lds-dual-ring"/></p>
+                <div className="lds-dual-ring"/>
+            </p>
         </div>;
 
         return (

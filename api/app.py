@@ -8,7 +8,7 @@ from firebase_admin import firestore
 from flask import Flask, make_response, request
 from flask_cors import CORS
 
-from beatslice.slice import beatslice
+from beatslice.slice import beatslice, SlicingOptions
 
 app = Flask(__name__)
 CORS(app)
@@ -32,11 +32,15 @@ def ping():
 def slice_from_pointer(pointer):
     slicing_status = db.collection(u'slicing-status')
     document = slicing_status.document(pointer)
-    url = document.get().to_dict()["url"]
+    stored_data = document.get().to_dict()
+
+    url = stored_data["url"]
+
+    options = SlicingOptions(sensitivity=stored_data["slicing_options"].get("sensitivity", "MEDIUM"))
 
     final_archive = None
 
-    for status, archive in beatslice(url):
+    for status, archive in beatslice(url, options):
         document.update({"status": status})
         final_archive = archive
 

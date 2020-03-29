@@ -1,20 +1,24 @@
 import os
 import tempfile
 import zipfile
+from collections import namedtuple
 
 import librosa
 import soundfile
 import youtube_dl
 
 
-def beatslice(url):
+SlicingOptions = namedtuple("SlicingOptions", ["sensitivity"])
+
+
+def beatslice(url, options):
     yield "DOWNLOADING", None
 
     data, samplerate = _download_with_youtube_dl(url)
 
     yield "FINDING_BEATS", None
 
-    transients = _get_transients(data, samplerate)
+    transients = _get_transients(data, samplerate, options)
 
     yield "CREATING_ZIP_FILE", None
 
@@ -23,8 +27,34 @@ def beatslice(url):
     yield "COMPLETE", archive
 
 
-def _get_transients(data, samplerate):
-    transient_frames = librosa.onset.onset_detect(data, sr=samplerate, backtrack=True)
+def _sensitivity_to_peak_pick_args(sensitivity, samplerate):
+    if sensitivity == "HIGH":
+        return {
+            "pre_max": 0.01 * samplerate // 512,
+            "post_max": 1,
+            "pre_avg": 0.02 * samplerate // 512,
+            "post_avg": 0.02 * samplerate // 512 + 1,
+            "delta": 0.02,
+            "wait": 0.01 * samplerate // 512
+        }
+    if sensitivity == "LOW":
+        return {
+            "pre_max": 0.20 * samplerate // 512,
+            "post_max": 1,
+            "pre_avg": 0.6 * samplerate // 512,
+            "post_avg": 0.6 * samplerate // 512 + 1,
+            "delta": 0.2,
+            "wait": 0.12 * samplerate // 512
+        }
+
+
+def _get_transients(data, samplerate, options):
+    if options.sensitivity == "MEDIUM":
+        transient_frames = librosa.onset.onset_detect(data, sr=samplerate, backtrack=True)
+    else:
+        peak_args = _sensitivity_to_peak_pick_args(options.sensitivity, samplerate)
+        transient_frames = librosa.onset.onset_detect(data, sr=samplerate, backtrack=True, **peak_args)
+
     # noinspection PyTypeChecker
     transient_samples = [0] + librosa.frames_to_samples(transient_frames).tolist()
 
