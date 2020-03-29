@@ -10,11 +10,11 @@
         }
 
         .iframe-content h1 {
-            color: #ccc;
+            color: #ffffff;
         }
 
         .iframe-content .slicing-status {
-            color: #ccc;
+            color: #ffffff;
         }
 
         .lds-dual-ring {
