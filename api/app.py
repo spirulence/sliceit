@@ -50,6 +50,8 @@ def slice_from_pointer(pointer):
         response.headers['Content-Type'] = 'application/zip'
         response.headers['Content-Disposition'] = 'attachment; filename=sliced.zip'
 
+        document.update({'completed_at': datetime.datetime.utcnow().isoformat()})
+
         return response
 
 

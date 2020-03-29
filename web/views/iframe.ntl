@@ -102,7 +102,7 @@
                         return response.json()
                     })
                     .then((status) => {
-                        setSlicingStatus(status.status)
+                        setSlicingStatus(status.status.replace(/_/g, " "))
                     });
             };
 
