@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Beat Slice IFrame</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <style>
         body {
             background: #000;
@@ -42,6 +43,10 @@
             100% {
                 transform: rotate(360deg);
             }
+        }
+
+        .call-to-action {
+            font-family: 'Montserrat', sans-serif;
         }
     </style>
 </head>
@@ -150,7 +155,7 @@
 
         return (
             <div className="iframe-content">
-                <h1 className="text-center">Try it free!</h1>
+                <h1 className="text-center call-to-action">TRY IT FREE!</h1>
                 <p className="lead text-muted text-center">Paste a url to your video, mp3, wav, or other audio file, and select a sensitivity level.</p>
                 {isSlicing ? status : form}
             </div>
