@@ -155,7 +155,7 @@
 
         return (
             <div className="iframe-content">
-                <h1 className="text-center call-to-action">Try it free!</h1>
+                <h1 className="text-center call-to-action">TRY IT FREE!</h1>
                 <p className="lead text-muted text-center">Paste a url to your video, mp3, wav, or other audio file, and select a sensitivity level.</p>
                 {isSlicing ? status : form}
             </div>
